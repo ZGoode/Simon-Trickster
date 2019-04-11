@@ -25,7 +25,7 @@
 #define SD_ChipSelectPin 10
 #include <TMRpcm.h>
 #include <SPI.h>
-#include <tone.h>
+#include <Tone.h>
 #include <AFArray.h>
 
 const int redled = 0;
@@ -44,6 +44,8 @@ boolean ToneWav = false;
 boolean continueGame = false;
 
 AFArray<int> pattern;
+
+TMRpcm tmrpcm;
 
 void setup() {
   tmrpcm.speakerPin = 9;
