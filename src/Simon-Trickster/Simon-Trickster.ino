@@ -37,6 +37,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
 
 //max score is 50 per level
 //each level gets faster and faster
+//number of levels is 10
 const int maxscore = 50;
 const int maxlevel = 10;
 
@@ -102,23 +103,19 @@ void playPattern () {
   for (int i = 0; i < patternLength; i++) {
     if (pattern[i] == 0) {
       digitalWrite(redled, HIGH);
-      //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-      delay(ontime / level);
+      playMusic(6);
       digitalWrite(redled, LOW);
     } else if (pattern[i] == 1) {
       digitalWrite(blueled, HIGH);
-      //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-      delay(ontime / level);
+      playMusic(7);
       digitalWrite(blueled, LOW);
     } else if (pattern[i] == 2) {
       digitalWrite(yellowled, HIGH);
-      //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-      delay(ontime / level);
+      playMusic(8);
       digitalWrite(yellowled, LOW);
     } else if (pattern[i] == 3) {
       digitalWrite(greenled, HIGH);
-      //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-      delay(ontime / level);
+      playMusic(9);
       digitalWrite(greenled, LOW);
     }
 
@@ -137,8 +134,7 @@ void playGame () {
     if (digitalRead(redbutton) == HIGH) {
       if (pattern[i] == 0) {
         digitalWrite(redled, HIGH);
-        //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-        delay(ontime / level);
+        playMusic(6);
         digitalWrite(redled, LOW);
       } else {
         Stage = 2;
@@ -148,8 +144,7 @@ void playGame () {
     } else if (digitalRead(bluebutton) == HIGH) {
       if (pattern[i] == 1) {
         digitalWrite(blueled, HIGH);
-        //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-        delay(ontime / level);
+        playMusic(7);
         digitalWrite(blueled, LOW);
       } else {
         Stage = 2;
@@ -159,8 +154,7 @@ void playGame () {
     } else if (digitalRead(yellowbutton) == HIGH) {
       if (pattern[i] == 2) {
         digitalWrite(yellowled, HIGH);
-        //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-        delay(ontime / level);
+        playMusic(8);
         digitalWrite(yellowled, LOW);
       } else {
         Stage = 2;
@@ -170,8 +164,7 @@ void playGame () {
     } else if (digitalRead(greenbutton) == HIGH) {
       if (pattern[i] == 3) {
         digitalWrite(greenled, HIGH);
-        //tone("choose a satisfying beepy noise or maybe make a song idk yet", "idk");
-        delay(ontime / level);
+        playMusic(9);
         digitalWrite(greenled, LOW);
       } else {
         Stage = 2;
