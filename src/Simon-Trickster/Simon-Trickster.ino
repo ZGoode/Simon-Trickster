@@ -67,6 +67,12 @@ void setup() {
   pinMode(greenbutton, INPUT);
   pinMode(yellowbutton, INPUT);
 
+  pinMode(tonePin, INPUT);
+  pinMode(toneOnOff, INPUT);
+
+  strip.begin();
+  strip.show();
+
   playMusic(0);
 }
 
