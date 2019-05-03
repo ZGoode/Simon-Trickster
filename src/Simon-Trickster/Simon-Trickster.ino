@@ -50,6 +50,9 @@ int pattern[maxscore];
 
 int patternLength = 0;
 
+uint16_t rainbowCount = 0;
+unsigned long previousMillis = 0;
+
 void setup() {
 
   pinMode(redled, OUTPUT);
@@ -78,8 +81,12 @@ void setup() {
 
 void loop() {
   if (Stage == 0) {
+    rainbow(20);
+
     if ((digitalRead(redbutton) == HIGH) || (digitalRead(bluebutton) == HIGH) || (digitalRead(yellowbutton) == HIGH) || (digitalRead(greenbutton) == HIGH)) {
       Stage = 1;
+      strip.setPixelColor(0, 0, 0, 0);
+      strip.show();
       playMusic(1);
     }
   } else if (Stage == 1) {
@@ -94,6 +101,8 @@ void loop() {
 }
 
 void continuePattern () {
+  rainbow(20);
+
   if (patternLength < maxscore) {
     randomSeed(millis());
     pattern[patternLength] = random(0, 3);
@@ -106,6 +115,8 @@ void continuePattern () {
 }
 
 void playPattern () {
+  rainbow(20);
+
   for (int i = 0; i < patternLength; i++) {
     if (pattern[i] == 0) {
       digitalWrite(redled, HIGH);
@@ -140,41 +151,73 @@ void playGame () {
     if (digitalRead(redbutton) == HIGH) {
       if (pattern[i] == 0) {
         digitalWrite(redled, HIGH);
+        strip.setPixelColor(0, 0, 255, 0);
+        strip.show();
         playMusic(6);
         digitalWrite(redled, LOW);
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
       } else {
         Stage = 2;
+        strip.setPixelColor(0, 255, 0, 0);
+        strip.show();
         endGame();
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
         return;
       }
     } else if (digitalRead(bluebutton) == HIGH) {
       if (pattern[i] == 1) {
         digitalWrite(blueled, HIGH);
+        strip.setPixelColor(0, 0, 255, 0);
+        strip.show();
         playMusic(7);
         digitalWrite(blueled, LOW);
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
       } else {
         Stage = 2;
+        strip.setPixelColor(0, 255, 0, 0);
+        strip.show();
         endGame();
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
         return;
       }
     } else if (digitalRead(yellowbutton) == HIGH) {
       if (pattern[i] == 2) {
         digitalWrite(yellowled, HIGH);
+        strip.setPixelColor(0, 0, 255, 0);
+        strip.show();
         playMusic(8);
         digitalWrite(yellowled, LOW);
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
       } else {
         Stage = 2;
+        strip.setPixelColor(0, 255, 0, 0);
+        strip.show();
         endGame();
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
         return;
       }
     } else if (digitalRead(greenbutton) == HIGH) {
       if (pattern[i] == 3) {
         digitalWrite(greenled, HIGH);
+        strip.setPixelColor(0, 0, 255, 0);
+        strip.show();
         playMusic(9);
         digitalWrite(greenled, LOW);
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
       } else {
         Stage = 2;
+        strip.setPixelColor(0, 255, 0, 0);
+        strip.show();
         endGame();
+        strip.setPixelColor(0, 0, 0, 0);
+        strip.show();
         return;
       }
     }
@@ -220,4 +263,32 @@ void playMusic (int x) {
       return;
     }
   }
+}
+
+void rainbow(uint8_t wait) {
+  if (rainbowCount >= 256) {
+    rainbowCount = 0;
+  }
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= wait) {
+    // save the last time you blinked the LED
+    previousMillis = currentMillis;
+    strip.setPixelColor(0, Wheel((rainbowCount) & 255));
+    strip.show();
+    rainbowCount++;
+  }
+}
+
+uint32_t Wheel(byte WheelPos) {
+  WheelPos = 255 - WheelPos;
+  if (WheelPos < 85) {
+    return strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+  }
+  if (WheelPos < 170) {
+    WheelPos -= 85;
+    return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+  }
+  WheelPos -= 170;
+  return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
 }
