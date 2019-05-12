@@ -14,7 +14,6 @@
    SPEAKER ON/OFF - 12
  ***********************************************/
 
-#include <Tone.h>
 #include <Adafruit_NeoPixel.h>
 
 const int redled = 2;
@@ -87,7 +86,6 @@ void loop() {
       Stage = 1;
       strip.setPixelColor(0, 0, 0, 0);
       strip.show();
-      playMusic(1);
     }
   } else if (Stage == 1) {
     continuePattern();
@@ -95,7 +93,6 @@ void loop() {
     playGame();
   } else if (Stage == 2) {
     endGame();
-    playMusic(2);
     Stage = 0;
   }
 }
@@ -239,26 +236,181 @@ void winLevel () {
 
 void playMusic (int x) {
   if (digitalRead(toneOnOff) == HIGH) {
-    if (x == 0) {
-      /*music that plays on turn on*/
-    } else if (x == 1) {
-      /*music that plays on game start*/
-    } else if (x == 2) {
-      /*end game music*/
-    } else if (x == 3) {
+    if (x == 3) {
       /*win level music*/
+      tone(tonePin, 698);
+      delay(133);
+      noTone(tonePin);
+      delay(25);
+      tone(tonePin, 698);
+      delay(133);
+      noTone(tonePin);
+      delay(25);
+      tone(tonePin, 698);
+      delay(133);
+      noTone(tonePin);
+      delay(25);
+      tone(tonePin, 698);
+      delay(400);
+      tone(tonePin, 554);
+      delay(400);
+      tone(tonePin, 622);
+      delay(400);
+      tone(tonePin, 698);
+      delay(133);
+      noTone(tonePin);
+      delay(133);
+      tone(tonePin, 622);
+      delay(133);
+      tone(tonePin, 698);
+      delay(1200);
+      noTone(tonePin);
     } else if (x == 4) {
       /*win game music*/
+      tone(tonePin, 392);
+      delay(1304);
+      tone(tonePin, 392);
+      delay(217);
+      noTone(tonePin);
+      delay(25);
+      tone(tonePin, 392);
+      delay(217);
+      noTone(tonePin);
+      delay(25);
+      tone(tonePin, 392);
+      delay(217);
+      noTone(tonePin);
+      delay(25);
+      tone(tonePin, 392);
+      delay(1304);
+      tone(tonePin, 494);
+      delay(217);
+      tone(tonePin, 440);
+      delay(217);
+      tone(tonePin, 494);
+      delay(217);
+      tone(tonePin, 523);
+      delay(652);
+      tone(tonePin, 587);
+      delay(217);
+      tone(tonePin, 523);
+      delay(217);
+      tone(tonePin, 587);
+      delay(217);
+      tone(tonePin, 659);
+      delay(1304);
+      tone(tonePin, 698);
+      delay(435);
+      tone(tonePin, 587);
+      delay(435);
+      tone(tonePin, 659);
+      delay(435);
+      tone(tonePin, 740);
+      delay(1304);
+      tone(tonePin, 783);
+      delay(1800);
+    } else if (x == 0) {
+      /*turn on music*/
+      tone(tonePin, 262);
+      delay(430);
+      tone(tonePin, 311);
+      delay(430);
+      tone(tonePin, 466);
+      delay(860);
+      tone(tonePin, 262);
+      delay(430);
+      tone(tonePin, 311);
+      delay(430);
+      tone(tonePin, 466);
+      delay(860);
+      tone(tonePin, 262);
+      delay(430);
+      tone(tonePin, 311);
+      delay(430);
+      tone(tonePin, 587);
+      delay(645);
+      tone(tonePin, 622);
+      delay(215);
+      tone(tonePin, 587);
+      delay(215);
+      tone(tonePin, 622);
+      delay(215);
+      tone(tonePin, 587);
+      delay(215);
+      tone(tonePin, 622);
+      delay(215);
+      tone(tonePin, 587);
+      delay(430);
+      tone(tonePin, 466);
+      delay(430);
+      tone(tonePin, 262);
+      delay(430);
+      tone(tonePin, 311);
+      delay(430);
+      tone(tonePin, 392);
+      delay(860);
+      tone(tonePin, 415);
+      delay(430);
+      tone(tonePin, 466);
+      delay(430);
+      tone(tonePin, 392);
+      delay(860);
+      tone(tonePin, 698);
+      delay(430);
+      tone(tonePin, 622);
+      delay(430);
+      tone(tonePin, 587);
+      delay(215);
+      tone(tonePin, 622);
+      delay(215);
+      tone(tonePin, 587);
+      delay(215);
+      tone(tonePin, 622);
+      delay(215);
+      tone(tonePin, 466);
+      delay(215);
+      tone(tonePin, 523);
+      delay(215);
+      tone(tonePin, 466);
+      delay(215);
+      tone(tonePin, 523);
+      delay(215);
+      tone(tonePin, 392);
+      delay(215);
+      tone(tonePin, 415);
+      delay(215);
+      tone(tonePin, 392);
+      delay(215);
+      tone(tonePin, 415);
+      delay(215);
+      tone(tonePin, 392);
+      delay(430);
+      tone(tonePin, 311);
+      delay(430);
+      noTone(tonePin);
     } else if (x == 5) {
       /*lose game music*/
+      tone(tonePin, 117);
+      delay(250);
+      tone(tonePin, 110);
+      delay(250);
+      tone(tonePin, 104);
+      delay(250);
+      tone(tonePin, 98);
+      delay(500);
+      noTone(tonePin);
     } else if (x == 6) {
       /*red tone/music*/
+      tone(tonePin, 262);
     } else if (x == 7) {
       /*blue tone/music*/
+      tone(tonePin, 330);
     } else if (x == 8) {
       /*yellow tone/music*/
+      tone(tonePin, 392);
     } else if (x == 9) {
       /*green tone/music*/
+      tone(tonePin, 523);
     } else {
       return;
     }
